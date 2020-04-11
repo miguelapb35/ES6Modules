@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>  
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <title>JS ES6 Modules</title>
+</head>
+<body>
+  <div class="container">
+    <div class="row flow-text">
+      <div class="col s12">
+        <h1>JS ES6 Modules</h1>
+        <p>
+          The idea is to import and export diferent
+          sections of code from different files into other files 
+          which allows you to break appart your code into
+          more smaller grained files which make your code 
+          easier to understand
+        </p>
+        <div class="divider"></div>
+        <h2>export</h2>
+        <p>
+          There are default exports at the end
+          of the file, or normal export in {}, or
+          export the class inline instead of
+          exporting at the end of the file.
+          And functions can also be exported inline
+        </p>
+        <small>
+          <pre>
+export default class User {
+  constructor(name, age) {
+    this.name = name
+    this.age = age
+  }
+}
+
+export function printName(user) {
+  console.log(`User's name is ${user.age}`)
+}
+
+export function printAge(user) {
+  console.log(`User is ${user.age} years old`)
+}
+
+//export default User
+//export {printName, printAge}
+          </pre>
+        <div class="divider"></div>
+        <h2>import</h2>
+        </small>
+        <p>
+          To import a file
+        </p>
+        <small>
+          <pre>
+// import relative path
+            import User from './user.js'  
+// import absolute path
+import User from '/user.js'            
+          </pre>
+        </small>
+          <p>
+            In order to import we should add 
+            type='module' in the script tag in 
+            the html file
+          </p>
+          <small>
+            <pre>
+<code>
+  script type="module" src="main.js"
+</code>                           
+            </pre>
+          </small>
+          <p>
+            then you can import the <b>user.js</b>  file 
+          </p>
+        <small>
+          <pre>
+export default class User {
+  constructor(name, age) {
+    this.name = name
+    this.age = age
+  }
+}
+
+export function printName(user) {
+  console.log(`User's name is ${user.name}`)
+}
+
+export function printAge(user) {
+  console.log(`User is ${user.age} years old`)
+}
+
+//export default User
+//export {printName, printAge}         
+          </pre>
+        </small>
+        <p>
+          in the <b>main.js </b> file and use it:
+        </p>
+        <small>
+          <pre>
+import User, {printName as printUserName, printAge} from './user.js'
+
+const user = new User('Bob', 11)
+console.log(user)
+printUserName(user)
+printAge(user)           
+          </pre>
+        </small>
+        <div class="black white-text">
+          <h3>Console</h3>
+            <ul class="collection">
+              <li class="collection-item black white-text">  User {name: "Bob", age: 11} </li>
+              <li class="collection-item black white-text">  User´s name is Bob </li>
+              <li class="collection-item black white-text">  User´s age is 11 years old </li>
+            </ul>
+        </div> 
+        <p>
+          To import <b>non default things</b> you write
+          them inside curly braces <b>{ printName, printAge }</b>.
+          if you want to change the names you use an alias:
+          <b>{ printName as printUserName, printAge }</b>
+        </p>
+
+
+      </div>
+    </div>
+  </div>
+
+
+  <script type="module" src="main.js"></script>
+</body>
+</html>
